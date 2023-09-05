@@ -1,4 +1,4 @@
-import Tool from '../models/tools-model.ts';
+import Tool from '../models/tools-model.js';
 import asyncHandler from "express-async-handler";
 import {Request, Response} from "express";
 

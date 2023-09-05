@@ -2,9 +2,9 @@ import express, {Express} from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import toolsRouter from './routers/tools-route.ts';
+import toolsRouter from './routers/tools-route.js';
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4567;
 
 
 let corsOptions = {
