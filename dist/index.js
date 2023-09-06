@@ -5,7 +5,7 @@ import toolsRouter from './routers/tools-route.js';
 dotenv.config();
 const PORT = process.env.PORT || 4567;
 let corsOptions = {
-    origin: `http://localhost:${PORT}`
+    origin: `http://localhost:3000`
 };
 const app = express();
 app.use(cors(corsOptions));

@@ -71,5 +71,15 @@ const deleteTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0,
         throw new Error("Error deleting tool");
     }
 }));
-export { addTools, getTools, updateTools, deleteTools };
+const getAllTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tools = yield Tool.find({});
+        res.status(201).json({ message: "got tools", tools });
+    }
+    catch (_e) {
+        res.status(400);
+        throw new Error("Error getting tools");
+    }
+}));
+export { addTools, getTools, updateTools, deleteTools, getAllTools };
 //# sourceMappingURL=tools-controller.js.map

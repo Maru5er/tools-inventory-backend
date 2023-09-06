@@ -65,5 +65,15 @@ const deleteTools = asyncHandler(async (req: Request, res: Response) => {
     }
 });
 
+const getAllTools = asyncHandler(async (req: Request, res: Response) => {
+    try {
+        const tools = await Tool.find({});
+        res.status(201).json({message : "got tools", tools});
+    } catch {
+        res.status(400);
+        throw new Error("Error getting tools");
+    }
+});
 
-export {addTools, getTools, updateTools, deleteTools};
+
+export {addTools, getTools, updateTools, deleteTools, getAllTools};
