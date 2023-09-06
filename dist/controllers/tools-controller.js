@@ -20,5 +20,56 @@ const addTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
         throw new Error("Error adding tool");
     }
 }));
-export { addTools };
+const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let param = req.params.parameter;
+    let value = req.params.value;
+    const selection = {
+        [param]: value,
+    };
+    try {
+        const tool = yield Tool.find(selection);
+        res.status(201).json({ message: "got tools", tool });
+    }
+    catch (_b) {
+        res.status(400);
+        throw new Error("Error getting tools");
+    }
+}));
+const updateTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let tool = yield Tool.findById(req.params.id);
+        if (tool) {
+            tool.name = req.body.name || tool.name;
+            tool.code = req.body.code || tool.code;
+            tool.angle = req.body.angle || tool.angle;
+            tool.diameter = req.body.diameter || tool.diameter;
+            tool.size = req.body.size || tool.size;
+            tool.dateIn = req.body.dateIn || tool.dateIn;
+            tool.dateOut = req.body.dateOut || tool.dateOut;
+            tool.status = req.body.status || tool.status;
+            const updatedTool = yield tool.save();
+            res.json(updatedTool);
+        }
+        else {
+            res.status(404);
+            throw new Error("Tool not found");
+        }
+    }
+    catch (_c) {
+        res.status(400);
+        throw new Error("Error updating tool");
+    }
+}));
+const deleteTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    try {
+        yield Tool.deleteOne({ "_id": id });
+        res.status(201).json({ message: "deleted tool" });
+    }
+    catch (_d) {
+        res.status(400);
+        throw new Error("Error deleting tool");
+    }
+}));
+export { addTools, getTools, updateTools, deleteTools };
 //# sourceMappingURL=tools-controller.js.map

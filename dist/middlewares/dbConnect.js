@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { connect } from 'mongoose';
 const dbConnect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const connectionURL = "mongodb+srv://Marco:marcohendra10@cluster0.iwekgmc.mongodb.net/?retryWrites=true&w=majority";
+    const connectionURL = "mongodb+srv://test:testpassword@cluster0.ymcnd9i.mongodb.net/?retryWrites=true&w=majority";
     if (connectionURL == "") {
         return res.status(500).send({
             message: "Failed to connect with database, Empty database URL"
