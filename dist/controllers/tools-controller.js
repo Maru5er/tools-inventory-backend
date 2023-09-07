@@ -21,13 +21,8 @@ const addTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 }));
 const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let param = req.params.parameter;
-    let value = req.params.value;
-    const selection = {
-        [param]: value,
-    };
     try {
-        const tool = yield Tool.find(selection);
+        const tool = yield Tool.find(req.body);
         res.status(201).json({ message: "got tools", tool });
     }
     catch (_b) {

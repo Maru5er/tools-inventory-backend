@@ -15,13 +15,8 @@ const addTools = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getTools = asyncHandler(async (req: Request, res: Response) => {
-    let param : string = req.params.parameter;
-    let value : any = req.params.value;
-    const selection : Object = {
-        [param] : value,
-    };
     try {
-        const tool = await Tool.find(selection);
+        const tool = await Tool.find(req.body);
         res.status(201).json({message : "got tools", tool});
     } catch {
         res.status(400);
