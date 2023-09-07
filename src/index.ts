@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 
 let corsOptions = {
-    origin : `http://localhost:3000`
+    origin : [`http://localhost:3000`, "https://tools-inventory-1-6ec68a6025c3.herokuapp.com/"]
 };
 
 const app : Express = express();
