@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express';
 import {connect} from 'mongoose';
 
 const dbConnect = async (req: Request, res: Response, next: NextFunction) => {
-    const connectionURL: string = "mongodb+srv://johan:johanhendra10@cluster0.ymcnd9i.mongodb.net/?retryWrites=true&w=majority"
+    const connectionURL: string = process.env.MONGO_URI || "";
     if (connectionURL == "") {
         return res.status(500).send({
             message: "Failed to connect with database, Empty database URL"

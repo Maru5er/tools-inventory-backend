@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import toolsRouter from './routers/tools-route.js';
 dotenv.config();
-const PORT = process.env.PORT || 4567;
+const PORT = process.env.PORT || 3001;
 let corsOptions = {
     origin: `http://localhost:3000`
 };
