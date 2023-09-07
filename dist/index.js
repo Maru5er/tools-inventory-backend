@@ -5,7 +5,7 @@ import toolsRouter from './routers/tools-route.js';
 dotenv.config();
 const PORT = process.env.PORT || 3001;
 let corsOptions = {
-    origin: [`http://localhost:3000`, "https://tools-inventory-1-6ec68a6025c3.herokuapp.com/"]
+    origin: [`http://localhost:3000`, "http://tools-inventory-1-6ec68a6025c3.herokuapp.com/"]
 };
 const app = express();
 app.use(cors(corsOptions));
