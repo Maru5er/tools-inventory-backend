@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 let protect = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    let token = req.headers.authorization;
-    if (token && token.startsWith('Bearer')) {
+    let token = req.cookie.token;
+    if (token) {
         try {
             let decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
             req.user = decoded;

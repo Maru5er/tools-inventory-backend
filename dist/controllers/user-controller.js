@@ -15,9 +15,12 @@ const login = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, funct
         const { username, password } = req.body;
         const user = yield User.findOne({ username });
         if (user && (user.password) === password) {
-            res.status(201).json({
+            res.cookie('token', generateToken(user), {
+                httpOnly: true,
+            });
+            res.status(201).send({
                 _id: user._id,
-                token: generateToken(user)
+                username: user.username,
             });
         }
         else {

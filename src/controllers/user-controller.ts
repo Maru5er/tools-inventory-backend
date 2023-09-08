@@ -11,10 +11,13 @@ const login = asyncHandler(async (req : Request, res : Response) => {
         const {username, password} = req.body
         const user = await User.findOne({username});
         if (user && (user.password) === password) {
-            res.status(201).json({
-                _id : user._id,
-                token : generateToken(user)
+            res.cookie('token', generateToken(user), {
+                httpOnly : true,
             });
+            res.status(201).send({
+                _id : user._id,
+                username : user.username,
+            })
         } else {
             res.status(400);
             throw new Error("wrong password");
