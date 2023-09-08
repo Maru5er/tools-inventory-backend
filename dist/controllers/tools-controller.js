@@ -32,23 +32,10 @@ const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 const updateTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let tool = yield Tool.findById(req.params.id);
-        if (tool) {
-            tool.name = req.body.name || tool.name;
-            tool.code = req.body.code || tool.code;
-            tool.angle = req.body.angle || tool.angle;
-            tool.diameter = req.body.diameter || tool.diameter;
-            tool.size = req.body.size || tool.size;
-            tool.dateIn = req.body.dateIn || tool.dateIn;
-            tool.dateOut = req.body.dateOut || tool.dateOut;
-            tool.status = req.body.status || tool.status;
-            const updatedTool = yield tool.save();
-            res.json(updatedTool);
-        }
-        else {
-            res.status(404);
-            throw new Error("Tool not found");
-        }
+        const tool = yield Tool.updateMany({ "_id": req.body.ids }, {
+            $set: req.body.updateParams
+        });
+        res.json(tool);
     }
     catch (_c) {
         res.status(400);
@@ -56,9 +43,12 @@ const updateTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0,
     }
 }));
 const deleteTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.params.id;
+    const ids = req.body.ids;
+    console.log(ids);
     try {
-        yield Tool.deleteOne({ "_id": id });
+        yield Tool.deleteMany({ "_id": {
+                $in: ids
+            } });
         res.status(201).json({ message: "deleted tool" });
     }
     catch (_d) {

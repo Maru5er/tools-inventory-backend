@@ -27,22 +27,10 @@ const getTools = asyncHandler(async (req: Request, res: Response) => {
 
 const updateTools = asyncHandler(async (req: Request, res: Response) => {
     try {
-        let tool = await Tool.findById(req.params.id);
-        if (tool) {
-            tool.name = req.body.name || tool.name;
-            tool.code = req.body.code || tool.code;
-            tool.angle = req.body.angle || tool.angle;
-            tool.diameter = req.body.diameter || tool.diameter;
-            tool.size = req.body.size || tool.size;
-            tool.dateIn = req.body.dateIn || tool.dateIn;
-            tool.dateOut = req.body.dateOut || tool.dateOut;
-            tool.status = req.body.status || tool.status;
-            const updatedTool = await tool.save();
-            res.json(updatedTool);
-        } else {
-            res.status(404);
-            throw new Error("Tool not found");
-        }
+        const tool = await Tool.updateMany({"_id" : req.body.ids}, {
+                $set : req.body.updateParams
+            });
+            res.json(tool);
     } catch {
         res.status(400);
         throw new Error("Error updating tool");
@@ -51,9 +39,12 @@ const updateTools = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const deleteTools = asyncHandler(async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const ids = req.body.ids;
+    console.log(ids);
     try {
-        await Tool.deleteOne({"_id" : id});
+        await Tool.deleteMany({"_id" : {
+            $in : ids
+        }});
         res.status(201).json({message : "deleted tool"});
     } catch {
         res.status(400);

@@ -11,12 +11,10 @@ const login = asyncHandler(async (req : Request, res : Response) => {
         const {username, password} = req.body
         const user = await User.findOne({username});
         if (user && (user.password) === password) {
-            res.cookie('token', generateToken(user), {
-                httpOnly : true,
-            });
             res.status(201).send({
                 _id : user._id,
                 username : user.username,
+                token : generateToken(user),
             })
         } else {
             res.status(400);
@@ -40,7 +38,10 @@ const register = asyncHandler(async (req : Request, res : Response) => {
 });
 
 const generateToken = (user : userI) => {
-    return jwt.sign({_id : user._id}, process.env.JWT_SECRET, {
+    return jwt.sign({
+        _id : user._id,
+        username : user.username,
+    }, process.env.JWT_SECRET, {
         expiresIn : '30d'
     });
 }
