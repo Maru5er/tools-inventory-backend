@@ -6,7 +6,7 @@ let protect = asyncHandler(async (req: Request, res: Response, next: NextFunctio
     let token = req.cookie.token;
     if (token) {
         try {
-            let decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+            let decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = decoded;
             next();
         } catch {

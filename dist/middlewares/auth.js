@@ -13,7 +13,7 @@ let protect = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0,
     let token = req.cookie.token;
     if (token) {
         try {
-            let decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+            let decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = decoded;
             next();
         }
