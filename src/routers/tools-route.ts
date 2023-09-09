@@ -6,6 +6,7 @@ import { protect } from '../middlewares/auth.js';
 const router = express.Router();
 router.route('/').post([protect,dbConnect], addTools).get([protect,dbConnect], getAllTools);
 router.route('/search').post([protect,dbConnect], getTools);
-router.route('/:id').put([protect,dbConnect], updateTools).delete([protect,dbConnect], deleteTools);
+router.route('/update').put([protect,dbConnect], updateTools)
+router.route('/delete').post([protect,dbConnect], deleteTools);
 
 export default router;

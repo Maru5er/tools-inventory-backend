@@ -15,12 +15,10 @@ const login = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, funct
         const { username, password } = req.body;
         const user = yield User.findOne({ username });
         if (user && (user.password) === password) {
-            res.cookie('token', generateToken(user), {
-                httpOnly: true,
-            });
             res.status(201).send({
                 _id: user._id,
                 username: user.username,
+                token: generateToken(user),
             });
         }
         else {
@@ -45,7 +43,10 @@ const register = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 }));
 const generateToken = (user) => {
-    return jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    return jwt.sign({
+        _id: user._id,
+        username: user.username,
+    }, process.env.JWT_SECRET, {
         expiresIn: '30d'
     });
 };
