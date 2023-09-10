@@ -6,6 +6,7 @@ const ToolSchema = new Schema({
     angle: { type: Number, required: true },
     diameter: { type: Number, required: true },
     size: { type: Number, required: true },
+    material: { type: String, required: true },
     dateIn: { type: Date, required: false },
     dateOut: { type: Date, required: false },
     status: { type: String, required: false },
