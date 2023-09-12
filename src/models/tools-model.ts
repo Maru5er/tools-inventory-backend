@@ -14,6 +14,7 @@ interface ITool extends mongoose.Document {
     dateIn : Date,
     dateOut : Date,
     status : string,
+    description : string,
 }
 
 const ToolSchema = new Schema<ITool>({
@@ -27,7 +28,8 @@ const ToolSchema = new Schema<ITool>({
     dateIn : { type : Date, required : false },
     dateOut : { type : Date, required : false },
     status : { type : String, required : false },
-    machine : { type : String, required : false}
+    machine : { type : String, required : false},
+    description : { type : String, required : false},
 });
 
 const Tool = mongoose.model<ITool>('Tool', ToolSchema);
