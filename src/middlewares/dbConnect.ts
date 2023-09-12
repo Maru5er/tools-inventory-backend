@@ -1,5 +1,8 @@
 import {NextFunction, Request, Response} from 'express';
 import {connect} from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbConnect = async (req: Request, res: Response, next: NextFunction) => {
     const connectionURL: string = process.env.MONGO_URI || "";

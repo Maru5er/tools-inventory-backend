@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { connect } from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 const dbConnect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const connectionURL = process.env.MONGO_URI || "";
     if (connectionURL == "") {

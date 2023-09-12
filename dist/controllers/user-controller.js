@@ -50,5 +50,17 @@ const generateToken = (user) => {
         expiresIn: '30d'
     });
 };
-export { login, register };
+const getUser = ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let token = req.headers.authorization;
+    if (token && token.startsWith('Bearer')) {
+        try {
+            let userData = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+            res.status(201).send(userData);
+        }
+        catch (e) {
+            throw new Error("Error getting user" + e);
+        }
+    }
+}));
+export { login, register, getUser };
 //# sourceMappingURL=user-controller.js.map

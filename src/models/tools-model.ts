@@ -9,6 +9,8 @@ interface ITool extends mongoose.Document {
     diameter : number,
     size : number,
     material : string,
+    height : number,
+    machine : string,
     dateIn : Date,
     dateOut : Date,
     status : string,
@@ -21,9 +23,11 @@ const ToolSchema = new Schema<ITool>({
     diameter : { type : Number, required : true },
     size : { type : Number, required : true },
     material : {type: String, required : true},
+    height : {type : Number, required : false},
     dateIn : { type : Date, required : false },
     dateOut : { type : Date, required : false },
     status : { type : String, required : false },
+    machine : { type : String, required : false}
 });
 
 const Tool = mongoose.model<ITool>('Tool', ToolSchema);

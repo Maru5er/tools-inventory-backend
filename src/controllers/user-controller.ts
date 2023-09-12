@@ -46,4 +46,16 @@ const generateToken = (user : userI) => {
     });
 }
 
-export {login, register}
+const getUser = (async (req :Request, res : Response) => {
+    let token = req.headers.authorization;
+    if (token && token.startsWith('Bearer')) {
+        try {
+            let userData = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+            res.status(201).send(userData);
+        } catch (e) {
+            throw new Error("Error getting user" + e);
+        }
+    }
+});
+
+export {login, register, getUser}
