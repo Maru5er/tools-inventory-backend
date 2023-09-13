@@ -40,7 +40,6 @@ const updateTools = asyncHandler(async (req: Request, res: Response) => {
 
 const deleteTools = asyncHandler(async (req: Request, res: Response) => {
     const ids = req.body.ids;
-    console.log(ids);
     try {
         await Tool.deleteMany({"_id" : {
             $in : ids

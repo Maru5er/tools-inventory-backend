@@ -7,9 +7,12 @@ const ToolSchema = new Schema({
     diameter: { type: Number, required: true },
     size: { type: Number, required: true },
     material: { type: String, required: true },
+    height: { type: Number, required: false },
     dateIn: { type: Date, required: false },
     dateOut: { type: Date, required: false },
     status: { type: String, required: false },
+    machine: { type: String, required: false },
+    description: { type: String, required: false },
 });
 const Tool = mongoose.model('Tool', ToolSchema);
 export default Tool;
