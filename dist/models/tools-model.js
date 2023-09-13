@@ -13,6 +13,8 @@ const ToolSchema = new Schema({
     status: { type: String, required: false },
     machine: { type: String, required: false },
     description: { type: String, required: false },
+}, {
+    timestamps: true,
 });
 const Tool = mongoose.model('Tool', ToolSchema);
 export default Tool;

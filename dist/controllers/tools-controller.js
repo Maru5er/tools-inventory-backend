@@ -22,7 +22,7 @@ const addTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tool = yield Tool.find(req.body);
+        const tool = yield Tool.find(req.body).sort({ "createdAt": -1 });
         res.status(201).json({ message: "got tools", tool });
     }
     catch (_b) {
@@ -44,7 +44,6 @@ const updateTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0,
 }));
 const deleteTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const ids = req.body.ids;
-    console.log(ids);
     try {
         yield Tool.deleteMany({ "_id": {
                 $in: ids
@@ -58,7 +57,7 @@ const deleteTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0,
 }));
 const getAllTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tools = yield Tool.find({});
+        const tools = yield Tool.find({}).sort({ "createdAt": -1 });
         res.status(201).json({ message: "got tools", tools });
     }
     catch (_e) {

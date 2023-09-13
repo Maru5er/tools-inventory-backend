@@ -1,3 +1,4 @@
+import { timeStamp } from 'console';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -30,6 +31,8 @@ const ToolSchema = new Schema<ITool>({
     status : { type : String, required : false },
     machine : { type : String, required : false},
     description : { type : String, required : false},
+}, {
+    timestamps : true,
 });
 
 const Tool = mongoose.model<ITool>('Tool', ToolSchema);
