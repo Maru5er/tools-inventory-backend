@@ -22,7 +22,11 @@ const addTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tool = yield Tool.find(req.body).sort({ "createdAt": -1 });
+        const query = Object.assign({}, Object.keys(req.body).reduce((acc, key) => {
+            acc[key] = { $regex: req.body[key], $options: 'i' };
+            return acc;
+        }, {}));
+        const tool = yield Tool.find(query).sort({ "createdAt": -1 });
         res.status(201).json({ message: "got tools", tool });
     }
     catch (_b) {

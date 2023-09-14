@@ -17,7 +17,15 @@ const addTools = asyncHandler(async (req: Request, res: Response) => {
 
 const getTools = asyncHandler(async (req: Request, res: Response) => {
     try {
-        const tool = await Tool.find(req.body).sort({"createdAt":-1});
+        const query = {
+            ...Object.keys(req.body).reduce((acc, key) => {
+              acc[key] = { $regex: req.body[key], $options: 'i' };
+              return acc;
+            }, {})
+          };
+        const tool = await Tool.find(
+            query
+        ).sort({"createdAt":-1});
         res.status(201).json({message : "got tools", tool});
     } catch {
         res.status(400);
