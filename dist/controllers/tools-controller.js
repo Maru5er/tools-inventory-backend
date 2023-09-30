@@ -22,7 +22,7 @@ const addTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 const getTools = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tool = yield Tool.find(req.body).sort({ "createdAt": -1 });
+        const tool = yield Tool.find(req.body).collation({ locale: 'en', strength: 2 }).sort({ "createdAt": -1 });
         res.status(201).json({ message: "got tools", tool });
     }
     catch (_b) {
